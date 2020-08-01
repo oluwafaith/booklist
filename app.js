@@ -26,9 +26,7 @@ UI.prototype.addBookList = function(book){
   
   `
   list.appendChild(row)
-  document.getElementById('title').value = ""
-  document.getElementById('author').value = ""
-  document.getElementById('isbn').value = ""
+  
 }
 
 //show alert
@@ -54,16 +52,18 @@ setTimeout(function(){
 }
 
 //delete book
-//  UI.prototype.deleteBook(target){
-//    if(target.className === 'delete'){    
-//           target.parentElement.parentElement.remove();
-//    }
-//  }
+UI.prototype.deleteBook = function(target) {
+    if(target.className === 'delete'){
+        target.parentElement.parentElement.remove()
+    }
+}
 
 
 //clear fields
 UI.prototype.clearFields = function(){
-
+    document.getElementById('title').value = ""
+    document.getElementById('author').value = ""
+    document.getElementById('isbn').value = ""
 }
 
 //event listeners for add book
@@ -101,5 +101,13 @@ e.preventDefault();
 
 //event listener for delete
 document.getElementById('book-list').addEventListener('click', function(e){
+  //instantiate UI
+  const ui = new UI()
+
+//delete book
+  ui.deleteBook(e.target);
+
+  //show message
+  ui.showAlert(' Book removed', 'success' )
     e.preventDefault();
-})
+});
